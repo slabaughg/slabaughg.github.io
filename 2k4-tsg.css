@@ -1,0 +1,651 @@
+/* *******************************************************************************
+   Proposed SOI stylesheet. Conforms with look and feel of City's CMS derived web
+   pages, but with better scaling properties. Layout is controlled entirely from
+   the stylesheet and therefore does not require tables in HTML for formatting.
+   Layout is 'elastic' (see http://www.alistapart.com/articles/elastic) which zooms
+   entire page when browser settings change the font size. This keeps all elements
+   in approximate proportion to one another.
+   v.1.1, Jo Wood, 15th January, 2004
+   *******************************************************************************/
+
+/* ------------------ General layout, text colours and sizes  ------------------ */
+
+/* Page-wide styles. By setting the font-size to a %, all other size measurements
+   can be declared in terms of ems, keeping the layout elastic with an appropriate
+   range of font sizes depending on the user's browser settings.
+   At 80% font size, 1 em is 12.8 pixels (1 pixel = 0.0779 ems) on IE's 'Medium' 
+   text size setting. The main content area is equivalent to 460 pixels wide on 
+   a medium text setting.
+ */
+body 
+{
+	color: black;
+	background-color:white;
+	font-size: 80%;
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica", "Arial", "Verdana", sans-serif;
+	text-align: center;  /* Necessary for older browsers to centre page. Note this is
+	                        overruled by the container class to keep text left-aligned. */
+}
+
+#container
+{
+	margin-left: auto;
+	margin-right: 0.2em;
+	text-align: left;
+	/* width: 58em;         /* */
+	/* border: 1px solid #cc0; /*               Useful for debugging */
+}
+
+blockquote { font-weight: bolder; color: #101080; }
+
+p
+{
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	padding-right: 0.2em;
+}
+
+a { text-decoration: none; }
+
+h1
+{
+	 padding-top: 0em;
+	 margin-top: 0em;
+}
+
+#content h1, #content h2, #content h3, #content h4, #content h5, #content h6
+{
+	color: #666666;
+	margin-top: 0.4em; /*  */
+	margin-bottom: 0.5em;
+	padding-right: 0.2em;
+}
+#content h1, #news h1
+{
+	font-size: 1.4em;
+}
+
+#content h1 , #content h2 { 
+        text-indent: 0.2em;
+	padding: 0.2em 0em 0.1em 0em;
+	width: auto;
+	background-color: #f9f9f9;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+/* */
+
+#content h2
+{
+	font-size: 1.1em;
+}
+#content h3
+{
+	font-size: 1.1em;
+}
+#content h4, #content h5, #content h6
+{
+	font-size: 1em;
+}
+	
+th {
+        font-weight: bolder;
+        background-color:#eeeeee;
+        text-align:left;
+}
+
+#tnews {
+       padding: 0.4em;
+        vertical-align:top;
+        float: right; /* */
+        background-color: #ffffff;
+        border: solid 1px #aaaaaa;
+        width: auto;
+}
+
+#news {
+       padding: 0.4em;
+        vertical-align:top;
+        /* float: right; /* */
+        margin-left: 280px; /*  */
+        background-color: #ffffff;
+        border: solid 1px #aaaaaa;
+        width: auto;
+}
+
+#news h1, #doc_news h1 {
+        background-color: #eeeeee;
+	display: block;
+        margin-top: 0.1em;
+	border-top: none;
+	border-bottom: none;
+}
+
+#news a { font-weight: bolder; }
+ 
+#doc_news {
+       padding: 0.4em;
+        vertical-align:top;
+        /*float: right; /* */
+        /* margin-left: 300px; /*  */
+        background-color: #ffffff;
+        border: solid 1px #aaaaaa;
+        width: 278px;
+}
+
+/* --------------------------- Layout ID settings  ----------------------------- */
+
+/* There main areas for content display are shown below. 
+  +-----------------------------+
+  |       h  e  a  d  e  r      |
+  +-------+--------------+------+
+  |       |mainTitle     |      |
+  +       +--------------+      +
+  |       |breadcrumbs   |      |
+  +-------+--------------+------+
+  |outMenu|c o n t e n t |inMenu|
+  |       |              |      |
+  |       |              |      |
+  |       |              |      |
+  |       |              |      |
+  +-------+--------------+------+
+*/
+
+/* ------------------------------ City Header  --------------------------------- */
+
+/* The header is the one exception to the elastic layout of the page, this should
+   always take up the full width of the browser area and have a fixed 5 pixel padding.
+ */
+#shortcuts {
+        float: right;
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	display:block;
+	z-index:1
+}
+
+#shortcuts a, #shortcuts p {
+	color: #E7E7E7;
+	font-size: 0.2em;
+}
+
+#header
+{
+	padding-top: 5px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px;
+	margin: 0px;
+	margin-bottom: 0em;
+	background: #FFF;   /* Light grey */
+	border-style: solid;
+	border-width: 0px;
+        background-image: url("http://www.city.ac.uk/global/images/header_bb.gif");
+	background-repeat: repeat-x;
+	background-position: 0 90%;
+	/* border-bottom-width: 2px; */
+	/* border-color: #a6a6a6;	/* Grey */
+        min-height: 80px;
+}
+
+#headerhide { color: #E7E7E7;}
+
+#header img 
+{
+  border-style: none;
+  float: left;
+}
+
+#header p
+{
+  padding: 0;
+  margin: 0;
+  height: 0;
+  display:none;
+}
+
+/* cityhelp needs to be a class reather than id cos id crashed IE! */
+.cityHelp
+{
+  float: right;
+  margin: 0;
+  margin-top: 12px;  /* This is a poor fix for bottom-alignment of menu in header */
+  padding: 0;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+/* Hides the first | charater (needed for AAA) */
+.cityHelp:first-letter {
+	color: #e7e7e7;
+}
+
+.cityHelp a:link, .cityHelp a:visited, #inmenu a:link, #inmenu a:visited
+{
+	font-weight: normal;
+        color: #b32e27;
+	text-decoration: none;
+}
+#breadcrumbs a:link, #breadcrumbs a:visited
+{
+	color: #666666;
+}
+
+.cityHelp a:hover, .cityHelp a:active, #breadcrumbs a:hover, #breadcrumbs a:active, #inmenu a:hover, #inmenu a:active
+{
+	font-weight: normal;
+	color: #000000;
+	text-decoration: underline;
+}
+
+/* ----------------------------- Main title area  ------------------------------ */
+
+
+#mainTitle
+{
+	margin: 0;
+	margin-left: 1em;
+        padding: 0;
+	padding-left: 12em;
+ 	border-bottom: thin dotted #bbbbbb; /* */
+	/* width: 46em; /* */
+	/* background: url("/images/single_dot.gif") bottom left fixed repeat-x; */ 
+	/* background: url("/images/single_dot.gif") bottom left repeat-x; /*  */
+	/* background-color:white; */
+	/* border: 1px solid #eef; */
+}
+
+#mainTitle h1, #mainTitle h2, #mainTitle h3
+{
+	font-family: "Helvetica", "Arial", "Verdana", sans-serif;
+	font-size: 2em;
+	color: #666666;	/* Grey */
+	font-weight: normal;
+	padding:0;
+	margin: 0em 0em 0.1em 0em;
+	/*margin-bottom: 0.4em; */
+}
+
+/* ------------------------- Navigation breadcrumbs  --------------------------- */
+
+#breadcrumbs
+{
+	margin: 0.5em 0em 0.5em 1em;
+        padding: 0;
+	padding-left: 12em;
+	width: auto;
+        border: 0px solid #ddd;
+}
+
+#breadcrumbs img 
+{
+	width: 1em;
+	height: 1em;
+}
+
+#breadcrumbs .back 
+{
+	float: right;
+}
+#breadcrumbs .front 
+{
+	float: left;
+}
+.hide { visibility: collapse }
+/* --------------------------- Outward pointing menu  ----------------------------- */
+
+/* Items in this menu, which appear on the left of the screen should point to external
+   locations, or 'up' in the site hierarchy.
+ */
+
+#outmenu
+{
+        margin: 0;
+	margin-left: 1em;
+	position: absolute;
+	width: 12em;
+	padding:0;
+	/* border: 1px solid #cc0; /*               Useful for debugging */
+}
+#outmenu ul
+{
+	/* border: 1px solid #c0c; /*               Useful for debugging */
+	margin-left: 0em;
+	padding:0em;
+	margin-top: 0.5em;
+}
+#outmenu li
+{
+	list-style-type: none;
+}
+
+#outmenu li,  #inmenu h1, #inmenu h2, #inmenu h3, #inmenu h4, #inmenu h5
+{
+        font-size: 1em;
+	border-style: solid;
+	border-color: #ccc; 
+	background-color: #F6F6F6; /* */
+	/* background-color: #b32e27; */
+	border: 0; 
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	margin-left: 0em;
+	margin-right: 1em;
+	padding:0.2em;
+	margin-bottom: 0.5em;
+}
+
+#outmenu li.focus {
+	background-color: #d6d6d6;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+
+}
+
+.menuhide { color: #F6F6F6; }
+
+#outmenu a:link, #outmenu a:visited
+{
+	font-weight: normal;
+        color: #666666; /* */
+	text-decoration: none;
+}
+
+#outmenu a:hover, #outmenu a:active
+{
+	font-weight: normal;
+        color: #666666;
+	text-decoration: underline;
+}
+
+/* ---------------------------- Inward pointing menu  ----------------------------- */
+
+/* Items in this menu, which appear on the right of the screen should point to internal
+   locations, or 'down' in the site hierarchy. They allow the user to 'delve deeper'.
+ */
+
+#inmenu
+{
+    margin: 0;
+	margin-left: 49em;
+	margin-right: 1em;
+	position: absolute;
+	width: 12em;
+	padding:0;
+	padding-left: 1em;
+	background: url(../images/vertical_dot.gif) top left fixed repeat-y;
+}
+
+#inmenu a
+{
+	display: block;
+}
+
+#inmenu img
+{
+    margin-left: -0.9em;
+    display: block;	
+}
+
+#inmenu h1, #inmenu h2, #inmenu h3, #inmenu h4, #inmenu h5
+{
+    font-size: 1em;
+	color: #000;
+	font-weight: normal;
+	border: 0;
+	border-top: 1px;
+	border-bottom: 1px;
+	border-color: #ccc;
+	margin:0;
+	padding:0.2em;
+}
+
+/* ------------------------------ Main content area  ------------------------------ */
+
+#content 
+{
+	min-height: 28em;
+}
+
+#content img { margin-bottom: 0.5em;  }
+
+#content
+{
+        width: auto ;  /* */ 
+	padding: 0;
+	margin: 0;
+	margin-left: 2em;
+	/* border: 1px solid #ccc; /*               Useful for debugging */
+}
+
+#sectionTitle
+{
+	background-color: #FFF8F4;
+	border-style: solid;
+	border: 0;
+	border-top: 1px;
+	border-bottom: 1px;
+	border-color: #ccc;
+}
+
+#sectionTitle h1, #sectionTitle h2, #sectionTitle h3, #sectionTitle h4, #sectionTitle h5
+{
+	font-weight: bold;
+	padding:0;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+	margin:0;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+}
+
+
+#footer
+{
+        margin-right: 0em;
+        margin-left: 14em;
+	margin-top: 5em;
+	color: #666666;
+	font-size: 0.8em;
+	/*background-position: 50% 50%; */
+        /* background: url("/images/single_dot.gif") repeat-x; */
+ 	border-top: thin dotted #aaa; /* */
+	/* border: 1px solid #ccc; /*               Useful for debugging */
+}
+
+#footer a:link, #footer a:visited, #lastModified
+{
+	font-weight: normal;
+	color: #666666;
+	text-decoration: none;
+}
+
+#footer a:hover, #footer a:active
+{
+	font-weight: normal;
+	color: #000000;
+	text-decoration: underline;
+}
+
+/* ------------------------ Useful general formatting styles ---------------------- */
+
+#right 
+{
+	text-align: right;
+}
+
+#justify 
+{
+	text-align: justify; 
+}
+
+#highlightbox, #box, #flushbox
+{
+	float: left;
+}
+
+#highlightbox, #box
+{
+	padding: 0.5em;
+	margin-right: 0.5em;
+	margin-top:0.5em;
+	margin-bottom:0.5em;	
+}
+
+#highlightbox
+{
+	background-color: #FFF8F4;
+	border-style: solid;
+	border: 1px;
+	border-color: #ccc;
+}
+
+#columnbreak
+{
+	clear: both;
+}
+
+#largequote
+{
+	font-style:italic;
+	font-size:1.2em;
+	color: #666666;
+	margin: 0.5em;
+}
+
+.pgprog a { line-height: 150% }
+.pgprog dd span {color: #ffffff;}
+.contactus {font-size: 85%; color: #444444; font-weight: bolder; float: left; border: 0px solid #ffffff; padding:0em; }
+.pgprog dd { margin-left: 0px; font-size: 85% }
+.pgprog dt { font-weight: bolder; border: 1px  solid #888888; margin-bottom: 5px; padding: 5px; background-color: #ffffff }
+/* .pgprog td { text-align:top } */
+.pgprog dl { margin:0 1em 2em 0.5em }
+
+.headerHide {  }
+
+/* ------------------------------- Printing styles  ------------------------------- */
+/* Printing is set to a fixed font size that will give an equivalent layout to the 
+   elastic design for most printers. The left-hand outward pointing menu is not
+   printed, and the main content and titles are flushed left.
+ */  
+
+@media print 
+{
+	body 
+	{
+		margin: 0;
+		font-size: 10pt;
+	}
+
+	#content, #footer, #mainTitle, #breadcrumbs
+	{
+	        width: auto;
+		padding-left: 0;
+		margin-left: 0;
+	}
+	
+	#inmenu
+	{
+		margin-left: 36em;
+	}
+	
+        #shortcuts {display: none; }
+	#cityHelp { display: none; }
+	#outmenu { display: none; }	
+        #footer { display: none; }
+}
+
+
+.lfloat { float: left; }
+.leftfloat { margin-top: 0em; margin-right: 1.6em; float: left; vertical-align:
+text-bottom; }
+.rightfloat { margin-top: 0em; margin-left: 1.6em; float: right; vertical-align:
+ text-bottom; }
+.float li { margin-left: 1.6em; }
+
+#fullname {
+	/* border: 1px solid #cc0; /*               Useful for debugging */
+ 	width: 55%;	
+	float: left;
+} 
+
+#fullname h1, #fullname h2 {
+	color: #999999;
+	padding: 0em;
+	margin: 0em;
+ 	border: none;	
+        background-color: white;
+
+}
+#fullname h1 {
+	font-size: 240%;
+}	
+
+#fullname h2 {
+	font-size: 200%;
+}
+
+#mugshot {
+	/* border: 1px solid #cc0; /*               Useful for debugging */
+	margin-left: 0em;
+	margin-right: 0.5em;
+	text-align: right;
+	font-weight: bolder;
+	color: #aaaaaa;
+}
+#mugshot img {
+	float: left;
+
+}
+
+#details {
+	padding-left: 2em;
+}
+
+.quote_mark {
+        font-size: 118%;
+        line-height: 1em;
+        font-weight: bold;
+	color: #444;
+}
+
+.register {
+	border-style: solid;
+        border-width: 1px;
+}
+
+.register td, .register th {
+  	border-top: 1px solid #aaa;
+  	border-right: 1px solid #555;
+}
+
+.warn td {
+  background-color: #d75;
+  color: #fff;
+}
+
+.restarted td {
+  background-color: #097;
+  color: #fff;
+}
+
+
+.defining_elective {
+  padding: 2px 2px 2px 2px;
+  background-color: #a75;
+  color: #fff;
+}
+
+.recommended {
+  padding: 2px 2px 2px 2px;
+  background-color: #7a5;
+  color: #fff;
+}
+
+
+.ans p {
+  margin: 0 0 0 2em;
+  background-color: #a75;
+}
+
